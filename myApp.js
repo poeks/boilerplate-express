@@ -22,4 +22,16 @@ app.get('/json', function(req, res) {
     res.send({'message': message})
 })
 
+function addTime(req, res, next) {
+    console.log(req.time);
+    req.time = new Date().toString();
+    next()
+}
+
+
+app.get('/now', addTime, function(req, res, next) {
+    console.log(req.time);
+    res.send({'time': req.time})
+})
+
 module.exports = app;
