@@ -23,15 +23,18 @@ app.get('/json', function(req, res) {
 })
 
 function addTime(req, res, next) {
-    console.log(req.time);
     req.time = new Date().toString();
-    next()
+    next();
 }
 
 
-app.get('/now', addTime, function(req, res, next) {
-    console.log(req.time);
+app.get('/now', addTime, function(req, res) {
     res.send({'time': req.time})
+})
+
+
+app.get('/:word/echo', function(req, res) {
+    res.send({'echo': req.params.word});
 })
 
 module.exports = app;
